@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: Baymax * Date: 2018/1/11 * Time: 20:32 */namespace app\User\model;use think\Model;class Inter extends Model{    //protected $table = 'login';}

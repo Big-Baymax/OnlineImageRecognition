@@ -1,0 +1,196 @@
+{extend name="guest@base/check" /}
+{block name="title"}找回密码{/block}
+{block name="form"}
+<form class="sign-in" id="register" onsubmit="return false;">
+    <h2 class="title title-color">找回密码</h2>
+    <p class="sign-in-info title-color">精致产品 美妙生活<br>v 1.0.0</p>
+    <div class="form-group has-feedback">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input type="text" id="email" name="email" class="form-control" aria-label="请输入邮箱号" placeholder="请输入邮箱号"
+                   maxlength="50" autofocus="autofocus" required="required">
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
+            <input type="text" id="code" name="code" class="form-control" placeholder="请输入验证码" required="required">
+            <span class="code">
+						<img class="imgcode" src="{:captcha_src()}" alt="获取失败" title="看不清，换一张！"
+                             onclick="this.src='{:captcha_src()}'+'?id='+Math.random();">
+					</span>
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input type="text" id="emailcode" name="emailcode" class="form-control" placeholder="请输入收到的邮箱验证码"
+                   required="required">
+            <span class="input-group-btn">
+                           <button class="btn btn-success" type="button" id="getcode">获取验证码</button>
+                        </span>
+        </div>
+    </div>
+    <button id="setpwdbtn" class="btn btn-lg btn-primary btn-block" type="button">立即设置密码</button>
+    <a href="login.html" class="btn btn-info btn-block">返回登录</a>
+</form>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+    var form = $('#register');
+    $(function () {
+
+        form.bootstrapValidator({
+            message: '输入值不合法',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                email: {
+                    message: '用户名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '邮箱号不能为空'
+                        },
+                        emailAddress: {
+                            message: '邮箱地址格式有误'
+                        }
+                    }
+                },
+                code: {
+                    validators: {
+                        notEmpty: {
+                            message: '验证码不能为空'
+                        },
+                        stringLength: {
+                            min: 4,
+                            max: 4,
+                            message: '验证码长度不对'
+                        }
+                    }
+                },
+                emailcode: {
+                    validators: {
+                        notEmpty: {
+                            message: '邮箱验证码不能为空'
+                        },
+                        stringLength: {
+                            min: 5,
+                            max: 5,
+                            message: '邮箱验证码长度不对'
+                        }
+                    }
+                }
+            }
+
+        });
+        //判断在规定时间内是否有获取过
+        var validCodetime = getvalidCodetime();
+        var timeLine = parseInt((new Date().getTime() - validCodetime.time) / 1000);
+        if (timeLine < validCodetime.Codetime) {
+            getvalidCode(form, $("#getcode"), $("#email"), $("#code"), 60, '_URL_/geteamil');
+        } else {
+
+        }
+        $("#getcode").click(function () {
+            getvalidCode(form, $("#getcode"), $("#email"), $("#code"), 60, '_URL_/geteamil');
+        });
+
+        $("#setpwdbtn").click(function () {
+            var vb = form.data('bootstrapValidator');
+            vb.validate();
+            if (vb.isValid()) {
+                console.log(form.serialize()); //输出序列化表单值
+                console.log(form.serializeArray()); //自动将form表单封装成json
+                //发送ajax请求
+                $.ajax({
+                    url: '_URL_/checkpwd',
+                    async: false, //同步，会阻塞操作
+                    type: 'POST', //PUT DELETE POST
+                    data: form.serialize(),
+                    complete: function (msg) {
+                    },
+                    success: function (result) {
+                        //console.log(result);
+                        if (result.status) {
+                            //弹出设置密码的框
+                            $.dialog({
+                                title: '设置新密码',
+                                backgroundDismiss: 'buttonName',
+                                content: 'url:f.html',
+                                backgroundDismiss: false,
+                                contentLoaded: function (data, status, xhr) {
+                                    // when content is fetched
+                                    var self = this;
+                                    if (xhr.status != 200) {
+                                        this.setContentPrepend('无法获取资源！');
+                                        //alert('contentLoaded: ' + status);
+                                    }
+                                }
+                            });
+                        } else {
+                            $.confirm({
+                                draggable: true,
+                                title: '不好意思',
+                                theme: 'modern',
+                                icon: 'fa fa-warning',
+                                content: result.msg,
+                                type: 'red',
+                                typeAnimated: true,
+                                animation: 'zoom',
+                                closeAnimation: 'scale',
+                                autoClose: 'close|3000',
+                                buttons: {
+                                    close: {
+                                        text: '关闭',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    error: function () {
+                        $.confirm({
+                            title: '出错了',
+                            theme: 'modern',
+                            offsetTop: 30,
+                            icon: 'fa fa-warning',
+                            content: '无法访问服务器！',
+                            type: 'red',
+                            typeAnimated: true,
+                            animation: 'zoom',
+                            closeAnimation: 'scale',
+                            autoClose: 'close|3000',
+                            buttons: {
+                                close: {
+                                    text: '关闭',
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            } else {
+
+            }
+        })
+
+        //判断是否敲击了Enter键
+        $(document).keyup(function(event) {
+            if(event.keyCode == 13) {
+                $("#setpwdbtn").trigger("click");
+                return false;
+            } else {
+                return true;
+            }
+        })
+    });
+</script>
+{/block}
+</html>

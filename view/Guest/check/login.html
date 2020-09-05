@@ -1,0 +1,227 @@
+{extend name="guest@base/check" /}
+{block name="title"}用户登陆{/block}
+{block name="form"}
+<form class="sign-in" id="login" onsubmit="return false;">
+    <h2 class="title title-color">图像识别系统登录</h2>
+    <p class="sign-in-info title-color">精致产品 美妙生活<br>v 1.0.0</p>
+    <div class="form-group has-feedback">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" id="email" name="email" class="form-control" aria-label="请输入邮箱号" placeholder="请输入邮箱号"
+                   autofocus="autofocus" required="required">
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input type="password" id="password" name="password" class="form-control" aria-label="请输入密码"
+                   placeholder="请输入密码" required="required">
+            <!--<div class="input-group-btn">-->
+                <!--<button type="button" class="btn btn-default" aria-label="Help" tabindex="-1">-->
+                    <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                <!--</button>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
+            <input type="text" id="code" name="code" class="form-control" placeholder="请输入验证码" required="required">
+            <span class="code">
+						<img class="imgcode" src="{:captcha_src()}" alt="获取失败" title="看不清，换一张！"
+                             onclick="this.src='{:captcha_src()}'+'?id='+Math.random();">
+					</span>
+        </div>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input tabindex="-1"  type="checkbox" value="1" name="remember"> 下次免登录
+        </label>
+    </div>
+    <button id="loginbtn" class="btn btn-lg btn-primary btn-block" type="button">立即登陆</button>
+    <a href="register.html" class="btn btn-success btn-block">用户注册</a>
+    <a href="fpwd.html" class="btn btn-info btn-block">找回密码</a>
+</form>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+    var form = $("#login");
+    $(function () {
+
+        form.bootstrapValidator({
+            message: '输入值不合法',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+//				submitHandler: function(validator, form, submitButton) {
+//					$.post(form.attr('action'), form.serialize(), function(result) {
+//						// The result is a JSON formatted by your back-end  
+//						// I assume the format is as following:  
+//						//  {  
+//						//      valid: true,          // false if the account is not found  
+//						//      username: 'Username', // null if the account is not found  
+//						//  }  
+//						if(result.valid == true || result.valid == 'true') {
+//							// You can reload the current location  
+//							console.log(form.serialize());
+//							//window.location.reload();  
+//
+//							// Or use Javascript to update your page, such as showing the account name  
+//							// $('#welcome').html('Hello ' + result.username);  
+//						} else {
+//							// The account is not found  
+//							// Show the errors  
+//							console.log(form.serialize());
+//
+//							// Enable the submit buttons  
+//							$('#login').bootstrapValidator('disableSubmitButtons', false);
+//						}
+//					}, 'json');
+//				},
+            fields: {
+                email: {
+                    message: '用户名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '邮箱号不能为空'
+                        },
+                        emailAddress: {
+                            message: '邮箱地址格式有误'
+                        }
+                    }
+                },
+                code: {
+                    validators: {
+                        notEmpty: {
+                            message: '验证码不能为空'
+                        },
+                        stringLength: {
+                            min: 4,
+                            max: 4,
+                            message: '验证码长度不对'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        }
+                    }
+                },
+            }
+
+        })
+
+        $("#loginbtn").click(function () {
+            var vb = form.data('bootstrapValidator');
+            vb.validate();
+            if (vb.isValid()) {
+                //console.log(form.serialize()); //输出序列化表单值
+                //console.log(form.serializeArray()); //自动将form表单封装成json
+                //发送ajax请求
+                $.ajax({
+                    url: '_URL_/user/login',
+                    async: false, //同步，会阻塞操作
+                    type: 'POST', //PUT DELETE POST
+                    data: form.serialize(),
+                    complete: function (msg) {
+                        console.log(msg);
+                        //vb.disableSubmitButtons(false);
+                        //form.bootstrapValidator('disableSubmitButtons', false);
+                    },
+                    success: function (msg) {
+                        //console.log(result);
+                        console.log(msg);
+                        //var result = $.parseJSON(msg);
+                        //alert("hello");
+                        //console.log(result);
+                        if (msg.status) {
+                            //window.location.reload();
+                            $.confirm({
+                                title: '恭喜你',
+                                theme: 'modern',
+                                icon: 'fa fa-warning',
+                                content: '登录成功！',
+                                type: 'green',
+                                typeAnimated: true,
+                                animation: 'zoom',
+                                closeAnimation: 'scale',
+                                autoClose: 'close|3000',
+                                buttons: {
+                                    close: {
+                                        text: '关闭',
+                                        btnClass: 'btn-green',
+                                        action: function () {
+                                            window.location.href = "_URL_/";
+                                        }
+                                    }
+                                }
+                            });
+                        } else {
+                            $(".imgcode").click();
+                            $.confirm({
+                                title: '不好意思',
+                                theme: 'modern',
+                                icon: 'fa fa-warning',
+                                content: msg.msg,
+                                type: 'red',
+                                typeAnimated: true,
+                                animation: 'zoom',
+                                closeAnimation: 'scale',
+                                autoClose: 'close|3000',
+                                buttons: {
+                                    close: {
+                                        text: '关闭',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    error: function () {
+                        $(".imgcode").click();
+                        $.confirm({
+                            title: '出错了',
+                            theme: 'modern',
+                            offsetTop: 30,
+                            icon: 'fa fa-warning',
+                            content: '无法访问服务器！',
+                            type: 'red',
+                            typeAnimated: true,
+                            animation: 'zoom',
+                            closeAnimation: 'scale',
+                            autoClose: 'close|3000',
+                            buttons: {
+                                close: {
+                                    text: '关闭',
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            } else {
+
+            }
+        })
+
+        //判断是否敲击了Enter键
+        $(document).keyup(function(event) {
+            if(event.keyCode == 13) {
+                $("#loginbtn").trigger("click");
+                return false;
+            } else {
+                return true;
+            }
+        })
+    });
+</script>
+{/block}

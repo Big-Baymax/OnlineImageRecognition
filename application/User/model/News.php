@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: Baymax * Date: 2018/1/6 * Time: 19:43 */namespace app\User\model;use think\Model;class News extends Model{    //protected $table = 'login';    public function comments()    {        return $this->hasMany('UserNews','news_id');    }}

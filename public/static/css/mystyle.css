@@ -1,0 +1,316 @@
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+	background:  url("../img/guest/tm-bg-1.png") 10px -25px;
+	color: #e2e2e2;
+	/*background-size:cover;!* 将背景图片等比缩放填满整个容器 *!*/
+	/*background-size:contain;*//* 将背景图片等比缩放至某一边紧贴容器边缘 */
+	/*color: #fff;#062f46*/
+}
+.layui-layer{
+	color: #000000;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+canvas {
+	/*width: 100%;*/
+}
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+	padding: 60px 15px;
+}
+
+.footer > .container {
+	padding-top: 10px;
+	text-align: center;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.bg-drak{
+	background: #31373b;
+}
+
+/*导航栏颜色*/
+.navbar-inverse .navbar-brand{
+	color:#fff;
+}
+.navbar-inverse .navbar-nav>li>a{
+	color:#fff;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover{
+	color:#fd7706;
+	border-bottom: 3px solid #fd7706;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
+	color:#fd7706;
+	border-bottom: 3px solid #fd7706;
+	background: #54543a;
+}
+
+.list-group .list-group-title{
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 400;
+	background: #fd7706;
+	color: #fff;
+	border-bottom: 1px solid #fd7706;
+}
+
+.list-group .list-group-link{
+	color: #fff;
+	background: rgba(0, 193, 222, 0.6);
+}
+/*登录注册容器*/
+
+.sign-in {
+	max-width: 450px;
+	margin: 0 auto;
+	padding: 15px;
+}
+
+
+/*登录注册表单组件边距*/
+
+.sign-in .input-group {
+	margin-bottom: 15px;
+	/*margin: 0px 50px;*/
+}
+
+
+/*登录注册图形验证码样式*/
+
+.imgcode {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 40px;
+	text-align: center;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	left: -2px;
+	border-radius: 4px;
+	height: 46px;
+	position: relative;
+}
+
+.code {
+	display: table-cell;
+	width: 1%;
+	white-space: nowrap;
+	vertical-align: middle;
+	width: auto;
+}
+
+
+/*登录注册大标题*/
+
+.title {
+	text-align: center;
+}
+
+.sign-in-info {
+	font-size: 13px;
+	text-align: center;
+	padding: 5px 0;
+	line-height: 25px;
+}
+
+
+/*登录注册的脚部*/
+
+.sign-in-foot {
+	max-width: 450px;
+	margin: 0 auto;
+	text-align: center;
+}
+.sign-in-foot img{
+	margin-right: 5px;
+}
+
+/*竖直符号*/
+.vline {
+	display: inline-block;
+	width: 1px;
+	height: 12px;
+	vertical-align: middle;
+	background: #E0E0E0;
+	margin: 0 10px
+}
+
+/*用户主页样式*/
+
+.footer p{
+	margin-bottom: 5px;
+}
+.write{
+	color: #fff;
+}
+.img-container, .preview {
+	padding: 10px;
+}
+
+.img-preview > img {
+	max-width: 100%;
+}
+
+.img-preview {
+	/*border-radius:100%;*/
+	background-color: #fff;
+	float: left;
+	margin-bottom: 1rem;
+	margin-right: 1rem;
+	overflow: hidden;
+}
+
+.preview-lg {
+	height: 32rem;
+	width: 32rem;
+}
+
+.preview-md {
+	height: 16rem;
+	width: 16rem;
+}
+
+.preview-sm {
+	height: 8rem;
+	width: 8rem;
+}
+
+.preview-xs {
+	height: 4rem;
+	width: 4rem;
+}
+
+.container-box{
+	background: rgba(54, 76, 90, 0.6);
+	padding: 30px;
+	border-radius: 15px;
+	margin-top: 20px;
+}
+
+@media (max-width: 1185px) {
+	.preview-lg {
+		height: 16rem;
+		width: 16rem;
+	}
+
+	.preview-md {
+		height: 8rem;
+		width: 8rem;
+	}
+
+	.preview-sm {
+		height: 4rem;
+		width: 4rem;
+	}
+
+	.preview-xs {
+		height: 2rem;
+		width: 2rem;
+	}
+	.container-box{
+		background: #364c5a8f;
+		padding: 10px;
+		border-radius: 15px;
+		margin-top: 10px;
+	}
+}
+.avatar-edit{
+	margin-top: 15px;
+}
+
+.btn-orange {
+	color: #fff;
+	background-color: #fd7706;
+	border-color: #da6502
+}
+.btn-orange.focus,
+.btn-orange:focus {
+	color: #fff;
+	background-color: #d86402;
+	border-color: #c55c03
+}
+
+.btn-orange:hover {
+	color: #fff;
+	background-color: #d86402;
+	border-color: #c55c03
+}
+
+.btn-orange.active,
+.btn-orange:active,
+.open>.dropdown-toggle.btn-orange {
+	color: #fff;
+	background-color: #d86402;
+	border-color: #c55c03
+}
+
+.btn-orange.active.focus,
+.btn-orange.active:focus,
+.btn-orange.active:hover,
+.btn-orange:active.focus,
+.btn-orange:active:focus,
+.btn-orange:active:hover,
+.open>.dropdown-toggle.btn-orange.focus,
+.open>.dropdown-toggle.btn-orange:focus,
+.open>.dropdown-toggle.btn-orange:hover {
+	color: #fff;
+	background-color: #d86402;
+	border-color: #c55c03
+}
+
+.btn-orange.active,
+.btn-orange:active,
+.open>.dropdown-toggle.btn-orange {
+	background-image: none
+}
+
+.btn-orange.disabled.focus,
+.btn-orange.disabled:focus,
+.btn-orange.disabled:hover,
+.btn-orange[disabled].focus,
+.btn-orange[disabled]:focus,
+.btn-orange[disabled]:hover,
+fieldset[disabled] .btn-orange.focus,
+fieldset[disabled] .btn-orange:focus,
+fieldset[disabled] .btn-orange:hover {
+	background-color: #d86402;
+	border-color: #c55c03
+}
+
+.btn-orange .badge {
+	color: #da6502;
+	background-color: #fff
+}
+.form-box{
+	background: rgba(54, 76, 90, 0.5);
+	padding: 30px;
+	border-radius: 15px;
+	margin-top: 20px;
+}
+.form-title{
+	text-align: left;
+	margin-bottom: 20px;
+	padding-left:15px;
+	font-size:30px;
+	border-left:5px solid #fd7706 ;
+}
+.form-box input{
+	background: #ffe1c8;
+	border: 1px solid #fd7706;
+}

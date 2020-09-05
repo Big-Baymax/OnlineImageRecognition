@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: Baymax * Date: 2018/3/30 * Time: 18:20 */namespace app\Admin\model;use think\Model;class AuthGroupAccess extends Model{}

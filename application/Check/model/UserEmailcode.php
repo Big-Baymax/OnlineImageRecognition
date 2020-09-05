@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: Baymax * Date: 2017/11/26 * Time: 19:01 */namespace app\check\model;use think\Model;class UserEmailcode extends Model{    //protected $table = 'login';}

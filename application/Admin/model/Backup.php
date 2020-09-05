@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: Baymax * Date: 2017/12/24 * Time: 16:32 */namespace app\Admin\model;use think\Model;class Backup extends Model{    //protected $table = 'login';}

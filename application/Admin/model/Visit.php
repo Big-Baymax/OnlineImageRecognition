@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: Baymax * Date: 2018/3/17 * Time: 16:34 */namespace app\Admin\model;use think\Model;class Visit extends Model{}

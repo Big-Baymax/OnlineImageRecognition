@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="" method="post" id="findpwd" onsubmit="return false;">
+    <div class="form-group">
+        <label>新密码</label>
+        <input autofocus type="text" id="npwd" name="npwd" placeholder="请输入新密码" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>确认密码</label>
+        <input autofocus type="text" id="rnpwd" name="rnpwd" placeholder="请再次输入密码" class="form-control">
+    </div>
+    <div class="form-group">
+        <a href="javascript:void(0);" class="btn btn-info btn-block" id="sendpwdbtn">确定提交</a>
+    </div>
+</form>
+</body>
+</html>
+<script>
+    var sendform = $('#findpwd');
+    sendform.bootstrapValidator({
+        message: '输入值不合法',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            npwd: {
+                message: '用户名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 50,
+                        message: '密码长度不对'
+                    }
+                }
+            },
+            rnpwd: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 50,
+                        message: '密码长度不对'
+                    },
+                    //相同
+                    identical: {
+                        field: 'npwd',
+                        message: '两次密码不一致'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: '密码由数字、字母、下划线和&middot组成'
+                    }
+                }
+            }
+        }
+
+    });
+    $("#sendpwdbtn").click(function () {
+        var vb = sendform.data('bootstrapValidator');
+        vb.validate();
+        if (vb.isValid()) {
+            $.ajax({
+                url: '_URL_/updatepwd',
+                async: false, //同步，会阻塞操作
+                type: 'POST', //PUT DELETE POST
+                data: sendform.serialize(),
+                success: function (result) {
+                    if (result.status) {
+                        $.confirm({
+                            title: '恭喜你',
+                            theme: 'modern',
+                            icon: 'fa fa-warning',
+                            content: '修改成功，即将前往登录！',
+                            type: 'green',
+                            typeAnimated: true,
+                            animation: 'zoom',
+                            closeAnimation: 'scale',
+                            autoClose: 'close|3000',
+                            buttons: {
+                                close: {
+                                    text: '关闭',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.href = "_URL_/login";
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        $.confirm({
+                            draggable: true,
+                            title: '不好意思',
+                            theme: 'modern',
+                            icon: 'fa fa-warning',
+                            content: result.msg,
+                            type: 'red',
+                            typeAnimated: true,
+                            animation: 'zoom',
+                            closeAnimation: 'scale',
+                            autoClose: 'close|3000',
+                            buttons: {
+                                close: {
+                                    text: '关闭',
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function () {
+                    $.confirm({
+                        title: '出错了',
+                        theme: 'modern',
+                        offsetTop: 30,
+                        icon: 'fa fa-warning',
+                        content: '无法访问服务器！',
+                        type: 'red',
+                        typeAnimated: true,
+                        animation: 'zoom',
+                        closeAnimation: 'scale',
+                        autoClose: 'close|3000',
+                        buttons: {
+                            close: {
+                                text: '关闭',
+                                btnClass: 'btn-red',
+                                action: function () {
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        //判断是否敲击了Enter键
+        $(document).keyup(function(event) {
+            if(event.keyCode == 13) {
+                $("#sendpwdbtn").trigger("click");
+                return false;
+            } else {
+                return true;
+            }
+        })
+    });
+</script>

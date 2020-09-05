@@ -1,0 +1,398 @@
+{extend name="base/base" /}
+<title>{block name="title"} - 登录{/block}</title>
+{block name="body"}
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+
+        <div class="row">
+            <div class="col-sm-12">
+                        <div class="panel blank-panel">
+
+                            <div class="panel-heading">
+                                <div class="panel-options">
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#tab-avatar" aria-expanded="true">
+                                                <i class="fa fa-file-photo-o"></i><span class="hidden-xs">本地上传</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a data-toggle="tab" href="#tab-camera" aria-expanded="false">
+                                            <i class="fa fa-camera"></i><span class="hidden-xs">拍照上传</span>
+                                        </a>
+                                        </li>
+                                        <li class="">
+                                            <a data-toggle="tab" href="#tab-picture" aria-expanded="false">
+                                            <i class="fa fa-picture-o"></i><span class="hidden-xs">在线选择</span>
+                                        </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div id="tab-avatar" class="tab-pane active">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <!--跨域添加crossorigin="anonymous"属性-->
+                                            <img id="image" crossorigin="anonymous" src="_IMG_/avatar/{$Think.session.avatar_admin}" style="max-width: 100%;">
+                                        </div>
+
+                                        <div class="col-sm-6 col-xs-12" style="margin: 50px 0px 0px 0px">
+                                            <div class="show-6 col-sm-6 col-xs-6" data-toggle="tooltip" data-placement="top" title="大">
+                                            </div>
+                                            <div class="show-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top" title="中">
+                                            </div>
+                                            <div class="show-2 col-sm-2 col-xs-2" data-toggle="tooltip" data-placement="top" title="小">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-12">
+                                            <div class="col-sm-6 col-xs-12 edit-con" style="margin: 10px 0px 0px 0px">
+                                            <div class="btn-group">
+                                                <label class="btn btn-primary btn-upload" for="inputImage" title="选择图片" data-toggle="tooltip" data-animation="false" data-original-title="选择图片">
+                                                    <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                                                        <span class="fa icon-menu fa-upload"></span>
+                                                </label>
+                                                <!--<button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="网络图片" id="urlbtn"><i class="fa icon-menu fa-link"></i></button>-->
+                                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="裁剪预览" id="cropbtn"><i class="fa icon-menu fa-crop"></i></button>
+                                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="上传提交" id="upbtn"><i class="fa icon-menu fa-check"></i></button>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="水平旋转" id="hbtn"><i class="fa icon-menu fa-arrows-h"></i></button>
+                                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="竖直旋转" id="vbtn"><i class="fa icon-menu fa-arrows-v"></i></button>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="放大" id="zpbtn"><i class="fa icon-menu fa-search-plus"></i></button>
+                                                <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="缩小" id="zmbtn"><i class="fa icon-menu fa-search-minus"></i></button>
+                                            </div>
+                                             <div class="btn-group">
+                                                 <button class="btn btn-primary" type="button" aria-pressed="false" data-toggle="tooltip" data-placement="top" title="左旋转" id="rlbtn"><i class="fa icon-menu fa-rotate-left"></i></button>
+                                                 <button class="btn btn-primary" type="button" aria-pressed="false" data-toggle="tooltip" data-placement="top" title="右旋转" id="rrbtn"><i class="fa icon-menu fa-rotate-right"></i></button>
+                                             </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary" title="左移" data-toggle="tooltip" data-animation="false" title="" data-original-title="左移" id="albtn">
+                                                        <span class="fa icon-menu fa-arrow-left"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary" title="右移" data-toggle="tooltip" data-animation="false" title="" data-original-title="右移" id="arbtn">
+                                                        <span class="fa icon-menu fa-arrow-right"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary" title="上移" data-toggle="tooltip" data-animation="false" title="" data-original-title="上移" id="apbtn">
+                                                        <span class="fa icon-menu fa-arrow-up"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary" title="下移" data-toggle="tooltip" data-animation="false" title="" data-original-title="下移" id="adbtn">
+                                                        <span class="fa icon-menu fa-arrow-down"></span>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="tab-camera" class="tab-pane">
+                                        <div class="col-sm-4 makephoto">
+                                                <span class="fa fa-camera icon"></span>
+                                                <p>点击上传，或将文件拖到此处！</p>
+                                        </div>
+                                    </div>
+                                    <div id="tab-picture" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/1.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/1.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/2.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/2.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/3.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/3.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/4.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/4.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/5.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/5.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/6.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/6.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/7.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/7.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/8.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/8.JPG">
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-4 col-lg-3 galleryimg">
+                                                <a href="_IMG_/gallery/9.JPG" target="_blank" class="imgcon">
+                                                    <img src="_IMG_/gallery/9.JPG">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+        </div>
+        </div>
+    </div>
+</body>
+{/block}
+{block name="model"}
+<div class="modal fade link-model" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">图片链接</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="form">
+                    <div class="input-group">
+                        <span class="input-group-addon"><strong>链接：</strong></span>
+                        <input type="text" name="link" id="link" class="form-control" placeholder="请填图片链接">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="X-OK" type="button" class="btn btn-primary">打开</button>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="linkjs"}
+<link href="_CSS_/plugins/cropper/cropper.min.css" rel="stylesheet">
+<script src="_JS_/plugins/cropper/cropper.min.js"></script>
+{/block}
+
+{block name="js"}
+
+<script>
+    // Tooltip
+    $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'hover'
+    });
+    var options = {
+        minContainerHeight :  0,
+        minContainerWidth : 0,
+        maxContainerHeight :  0,
+        maxContainerWidth : 0,
+        aspectRatio: 1 / 1,//裁剪框比例 1：1
+        viewMode : 1,//显示
+        guides :true,//裁剪框虚线 默认true有
+        dragMode : "move",
+        checkImageOrigin:true,
+        build: function (e) { //加载开始
+            //可以放你的过渡 效果
+        },
+        background : true,// 容器是否显示网格背景
+        movable : true,//是否能移动图片
+        cropBoxMovable :true,//是否允许拖动裁剪框
+        cropBoxResizable :true,//是否允许拖动 改变裁剪框大小
+
+    };
+
+    //var cropper = new Cropper($('#image'), options);
+    var cropper = $('#image').cropper(options);
+
+        //裁剪函数
+        $("#cropbtn").click(function(){
+            //console.log(cropper.getCroppedCanvas(cropper.getCanvasData()));
+            //console.log($('#image').cropper("getCanvasData"));
+            var data = $('#image').cropper("getCanvasData")
+            //console.log($('#image').cropper("getCroppedCanvas",data).toDataURL('image/jpg'));
+            $('.show-6').html($('#image').cropper("getCroppedCanvas",data));
+            $('.show-3').html($('#image').cropper("getCroppedCanvas",data));
+            $('.show-2').html($('#image').cropper("getCroppedCanvas",data));
+        });
+
+        //获取文件路径方法兼容
+        function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+        }
+
+        $("#inputImage").change(function () {
+            var objUrl = getObjectURL(this.files[0]);
+            //FileReader创建读取文件的对象
+//            var reader = new FileReader();
+//            var url = reader.readAsDataURL(this.files[0]);
+//            reader.onload=function(e){
+//                console.log(e);
+//            }
+//            console.log(isHasImg(objUrl));
+//            console.log(objUrl)
+            $('#image').cropper("replace",objUrl);
+            $('#image').cropper("reset");
+        })
+        //水平反转
+        $('#hbtn').click(function () {
+            var info = $('#image').cropper("getImageData");
+            console.log(info.scaleX);
+            if(info.scaleX == 1){
+                $('#image').cropper("scaleX", -1);
+            }else{
+                $('#image').cropper("scaleX", 1);
+            }
+
+        });
+        //竖直反转
+        $("#vbtn").click(function () {
+            var info = $('#image').cropper("getImageData");
+            if(info.scaleY == 1){
+                $('#image').cropper("scaleY", -1);
+            }else{
+                $('#image').cropper("scaleY", 1);
+            }
+        })
+        //左旋转
+        $("#rlbtn").click(function () {
+           $('#image').cropper("rotate", -15);
+        })
+       //右旋转
+        $("#rrbtn").click(function () {
+           $('#image').cropper("rotate", 15);
+        })
+        //缩小
+        $("#zmbtn").click(function () {
+            $('#image').cropper("zoom", -0.1)
+        })
+        //放大
+        $("#zpbtn").click(function () {
+            $('#image').cropper("zoom", 0.1)
+        })
+        //上移
+        $("#apbtn").click(function () {
+            $('#image').cropper("move", 0, -10);
+        })
+        //下移
+        $("#adbtn").click(function () {
+            $('#image').cropper("move", 0, 10);
+        })
+        //左移
+        $("#albtn").click(function () {
+            $('#image').cropper("move", -10, 0);
+        })
+        //右移
+        $("#arbtn").click(function () {
+            $('#image').cropper("move", 10, 0);
+        })
+
+    //打开链接
+    $("#urlbtn").click(function () {
+        $('.link-model').modal('toggle');
+    });
+
+     //检查是否是图像的方法
+    function isHasImg(pathImg){
+        var ImgObj=new Image(200,200);
+        ImgObj.src= pathImg;
+        console.log(ImgObj);
+        ImgObj.onerror=function(){alert("error!")};
+        ImgObj.onload=function(){alert("onload!")};
+        if(ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0))
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    $("#upbtn").click(function () {
+        var data = $('#image').cropper("getCanvasData")
+        //console.log($('#image').cropper("getCroppedCanvas",data).toDataURL('image/jpg'));
+        $.ajax({
+            url: '../admin/avatar_edit',
+            type: 'POST',
+            data: {
+                avatar:$('#image').cropper("getCroppedCanvas",data).toDataURL('image/jpg')
+            },
+            success: function (result) {
+                if (result.status) {
+                    //status为1成功
+                    layer.msg('' + result.msg, {
+                        icon: 1,
+                        time:3000,
+                        end:function(){
+                            parent.location.href=parent.location.href;
+                    }
+                    });
+
+                } else {
+                    layer.msg('' + result.msg, {icon: 2});
+                }
+            }
+        });
+
+    })
+
+//    $("#X-OK").click(function () {
+//        console.log(isHasImg($('#link').val()));
+//
+//        $('#image').cropper("replace",$('#link').val());
+//        $('#image').cropper("reset");
+//
+//        var url = "http://static.codeceo.com/images/2014/12/vis-timeline.jpg";
+//        $.ajax({
+//            url: url,
+//            type: 'GET',
+//            success: function (result) {
+//                console.log(result);
+//            }
+//        });
+//        $.getJSON("http://static.codeceo.com/images/2014/12/vis-timeline.jpg",function(result){
+//            console.log(result);
+//        });
+////        var xhr = new XMLHttpRequest();
+////        xhr.open('GET', url, true);
+////        xhr.responseType = "blob";
+////        xhr.setRequestHeader("client_type", "DESKTOP_WEB");
+////        xhr.setRequestHeader("desktop_web_access_key", _desktop_web_access_key);
+////        xhr.onload = function() {
+////            if (this.status == 200) {
+////                var blob = this.response;
+////                var img = document.createElement("img");
+////                img.onload = function(e) {
+////                    window.URL.revokeObjectURL(img.src);
+////                };
+////                img.src = window.URL.createObjectURL(blob);
+////                console.log(img);
+////                $("body").html(img);
+////            }
+////        }
+////        xhr.send();
+//    })
+
+
+
+
+</script>
+{/block}
