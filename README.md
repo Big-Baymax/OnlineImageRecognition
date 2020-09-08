@@ -70,12 +70,12 @@ URL	：{ROOT}/login
 URL	：{ROOT}/admin/user_list
 传输协议	：	https	请求方式	：	post
 接口说明	：获取所有用户信息用的
-参数说明	：参数名	   必需	  非空	  描述
-	   pageNumber	√    	√	请求第几页的数据
-	    pageSize	√   	√	每一页有多少条数据
-	   sortOrder	√	   √	正序还是倒序
-	    sortName			    排序的字段
-	   searchText			    搜索的关键字
+参数说明	： 参数名	         描述
+	   pageNumber	  请求第几页的数据(非空)
+	    pageSize	  每一页有多少条数据(非空)
+	   sortOrder	  正序还是倒序(非空)
+	    sortName	  排序的字段
+	   searchText	  搜索的关键字
 返回值	：total->总的有几条数据，data->当前页面的所有记录，last_page->最后一页
 
 ```
