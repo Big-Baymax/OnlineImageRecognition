@@ -29,24 +29,26 @@
 # 二、数据库设计
 ## 1.irp_user 表的设计
 | 字段名 | 数据类型 | 大小 | 主键 | 备注和说明 |
-|--|--|--|--|--|--|
-|标识（uid） | int | 11 | 是|自增列，不为空 |
-昵称（name） | 	varchar | 255 | 	-- | 	--
-邮箱(email) | 	varchar	 | 255	 | --	 | 用户登陆识别的
-密码（pwd） | 	varchar | 	255 | 	--	 | --
-状态（status） | 	int	 | 11 | 	--	 | 1：激活 0：禁用
-登录时间（login_time） | 	datetime | 	--	 | -- | 	最近登陆时间
-更新时间（update_time）	 | datetime	 | --	 | -- | 	--
-注册时间（time）	 | datetime | 	-- | 	--	 | --
-开放ID（openid） | 	varchar	 | 255	 | -- | 	第三方登陆用的
-登录信息（login_info）	 | varchar	 | 255 | 	--	 | Json格式数据
-登录次数（login_count） | 	int | 	255 | 	-- | 	--
-头像（avatar）	 | datetime | 	255	 | --	 | 头像地址
-积分（integral） | 	int | 	11 | 	-- | 	--
-位置（place） | 	varchar	 | 255	 | --	 | 用户地址信息
-手机号（phone） | 	varchar | 	255 | 	-- | 	--
-应用（application） | 	varchar	 | 255 | 	--	 | --
-行业（business） | 	varchar	 | 255	 | -- | 	--
+|:----------:|:-------:|:-----------:|:-----------:|:-----------:|
+| 标识（uid） | int | 11 | 是|自增列，不为空 |
+| 昵称（name） | 	varchar | 255 | 	-- | 	--|
+| 邮箱(email) | 	varchar	 | 255	 | --	 | 用户登陆识别的|
+| 密码（pwd） | 	varchar | 	255 | 	--	 | --|
+| 状态（status） | 	int	 | 11 | 	--	 | 1：激活 0：禁用|
+| 登录时间（login_time） | 	datetime | 	--	 | -- | 	最近登陆时间|
+| 更新时间（update_time）	 | datetime	 | --	 | -- | 	--|
+| 注册时间（time）	 | datetime | 	-- | 	--	 | --
+| 开放ID（openid） | 	varchar	 | 255	 | -- | 	第三方登陆用的|
+| 登录信息（login_info）	 | varchar	 | 255 | 	--	 | Json格式数据|
+| 登录次数（login_count） | 	int | 	255 | 	-- | 	--|
+| 头像（avatar）	 | datetime | 	255	 | --	 | 头像地址|
+| 积分（integral） | 	int | 	11 | 	-- | 	--|
+| 位置（place） | 	varchar	 | 255	 | --	 | 用户地址信息|
+| 手机号（phone） | 	varchar | 	255 | 	-- | 	--|
+| 应用（application） | 	varchar	 | 255 | 	--	 | --|
+| 行业（business） | 	varchar	 | 255	 | -- | 	--|
+
+
 <font color=#999AAA >提示：其他表设计详细看数据库接口设计文档
 
 # 三、接口设计
